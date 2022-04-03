@@ -48,8 +48,8 @@ function start(){
     
     // Search_student(Apidb)
     if (arr_split.length > 0){
-    Search_student(handle_mang(split_group(13,clone)))
-//     Search_student(handle_mang(split_group(arr_split[arr_split.length-1],clone)))
+//     Search_student(handle_mang(split_group(13,clone)))
+    Search_student(handle_mang(split_group(arr_split[arr_split.length-1],clone)))
         
 
     }else{
@@ -112,7 +112,7 @@ function close_all(){
 //     })
 //     .then(callback);
 // }
-function split_group(n,a){
+function split_group(n=13,a){
     var b = []
     tv = (chia(a.length,n))
     for (let i = 0;i<n;i++ ){
