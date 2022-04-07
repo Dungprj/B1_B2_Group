@@ -8,7 +8,7 @@ for (let i=0;i<clone.length;i++){
     nhom_main.push("https://dungprj.github.io/CHUA_CO_NHOM/")
 }
 
-
+// xoa join group
 let getElement_search_btn = document.querySelector("#search_btn")
 
 let getElement_input = document.querySelector("#input_main")
