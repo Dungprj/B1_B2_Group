@@ -30,34 +30,82 @@ function start(){
   
     
     // Search_student(Apidb)
-    if (arr_split.length > 0){
-//     Search_student(handle_mang(split_group(13,clone)))
-    Search_student(handle_mang(split_group(arr_split[arr_split.length-1],clone)))
+    try{
+
+        if (arr_split.length > 0){
+    //     Search_student(handle_mang(split_group(13,clone)))
+        Search_student(handle_mang(split_group(arr_split[arr_split.length-1],clone)))
+            
+    
+        }else if (isNumber(getElement_input.value)=== 1){
+            Search_student(Apidb)
+    
+        }else if(isNumber(getElement_input.value)=== 0){
+            search_sv_by_Name(Apidb)
+    
+        }
+    }catch(error){
+        alert("Lỗi !")
+    }
         
 
-    }else{
-      Search_student(Apidb)
+        
 
+}
+
+    
+    
+ 
+    
+    
+    
+
+
+
+function isNumber(s){
+    let so = ["1","2","3","4","5","6","7","8","9","0"]
+    let isFalse = 0
+    let isTrue = 0
+    for (let i= 0;i<s.length;i++){
+        if (so.includes(s[i])){
+            isTrue +=1
+        }else{
+            isFalse +=1
+        }
+         
+       
     }
+    if (isTrue==s.length){
+       return 1
+    }else{
+        return 0
+    }
+}
 
-
-    
-    
-    
-    
-    
-            }
     
     
     
 function search_sv(){
     let sl = chia_nhom()
+    
     Search_student(handle_mang(split_group(sl,clone)))
 
 
 
 }
+// search_sv_by_Name(Apidb)
 
+
+function search_sv_by_Name(ds){
+    ds_moi=ds.filter((obj)=>{
+        return obj.ten.toUpperCase() == getElement_input.value.toUpperCase()
+    })
+    console.log(ds_moi)
+    renderstudents(ds_moi)
+    console.log(`dang tim kiem sinh vien ${getElement_input.value}`)
+}
+
+// {'id': '1', 'msv': '2121050200', 'ho': 'Phạm Long', 'ten': 'An', 'ngay_sinh': '06/09/2003', 'lop': 'DCCTCT66B2', 'Phone': '0352914185'}   
 
 
 
@@ -96,7 +144,7 @@ function close_all(){
 //     .then(callback);
 // }
 function split_group(n=13,a){
-    var b = []
+    let b = []
     tv = (chia(a.length,n))
     for (let i = 0;i<n;i++ ){
         let mang =[]
@@ -119,9 +167,11 @@ function split_group(n=13,a){
 }
 
 function render_group(n,data){
-    var liststudents = document.querySelector("#student");
+    let liststudents = document.querySelector("#student");
     s = ' ';
+    
     for (let i=0;i<n;i++){
+
         
         index =`<h1 class = "index_cl" style="margin-top: 50px;">Nhóm ${i+1} </h1>`
         vt = i
@@ -131,7 +181,7 @@ function render_group(n,data){
         // c["vt"] = i
         
         
-        var htmls =
+        let htmls =
          data[i].map(function(student){
             return `<li class="std">
             <a href=${nhom_main[i]}> <button class ="append_group">tham gia vào nhóm ${i+1}</button></a>
@@ -233,8 +283,8 @@ function chia(a,b){
 
 
 function renderstudents(data1){
-    var liststudents = document.querySelector("#student");
-    var htmls = 
+    let liststudents = document.querySelector("#student");
+    let htmls = 
     data1.map(function(student){
         return `<li class="std style="z-index:-1;position: relative"">
         <h3 class="content" style="margin-bottom:2px" >Số thứ tự :${student.id}</h3>
@@ -247,9 +297,11 @@ function renderstudents(data1){
         <h3 class="content">SĐT :${student.Phone}</h3>
         </li>`
     })
-    
-    
 
+    console.log("dang render")
+    
+    
+    liststudents.style.display = "block";
     liststudents.innerHTML = htmls.join('');
 
 
@@ -282,56 +334,79 @@ function Search_student(mang){
         
     
     })
-    // console.log(result_search.length)
-    
-    
-    // let rs = Apidb.find(function(obj){
-    //     return obj.msv ==data_inp
+    if (arr_split.length !=0){
 
-
-    //  })
+        if (result_search.length!=0){
+            let liststudents = document.querySelector("#student");
+    
+            let htmls = 
+        result_search.map(function(student){
+            return `<li class="std">
+            <h1 class="content">Nhóm  :${student.vt}</h1>
+            <h2 class="content" style="margin-bottom:2px" >Số thứ tự :${student.id}</h2>
+            <h3 class="content">Mã sinh viên  :${student.msv}</h3>
+            <h3 class="content">Họ :${student.ho}</h3>
+            <h3 class="content">Tên :${student.ten}</h3>
+            <h3 class="content">Ngày sinh :${student.ngay_sinh}</h3>
+            <h3 class="content">Lớp :${student.lop}</h3>
+            <h3 class="content">Ngành :Công nghệ thông tin</h3>
+            <h3 class="content">SĐT :${student.Phone}</h3>
+            </li>`
+        })
+        liststudents.style.display = "block"
+    
+        liststudents.innerHTML = htmls.join('');
         
+            
+        }else if (result_search.length==0){
+            alert(`Không có sinh viên với mã sinh viên là ${data_inp}`)
     
-     
-    // console.log(result_search)
+        }
+        else if(data_inp.length <=0){
+            alert("Ban chưa nhập !")
+            
+            
     
-   
-    
-   
-
-    if (result_search.length!=0){
-        var liststudents = document.querySelector("#student");
-        var htmls = 
-    result_search.map(function(student){
-        return `<li class="std">
-        <h1 class="content">Nhóm  :${student.vt}</h1>
-        <h2 class="content" style="margin-bottom:2px" >Số thứ tự :${student.id}</h2>
-        <h3 class="content">Mã sinh viên  :${student.msv}</h3>
-        <h3 class="content">Họ :${student.ho}</h3>
-        <h3 class="content">Tên :${student.ten}</h3>
-        <h3 class="content">Ngày sinh :${student.ngay_sinh}</h3>
-        <h3 class="content">Lớp :${student.lop}</h3>
-        <h3 class="content">Ngành :Công nghệ thông tin</h3>
-        <h3 class="content">SĐT :${student.Phone}</h3>
-        </li>`
-    })
-    liststudents.style.display = "block"
-
-    liststudents.innerHTML = htmls.join('');
-    
-        
-    }else if (result_search.length==0){
-        alert(`Không có sinh viên với mã sinh viên là ${data_inp}`)
-
-    }
-    else if(data_inp.length <=0){
-        alert("Ban chưa nhập !")
-        
-        
-
+        }else{
+            alert("LỖI TÌM KIẾM !")
+        }
     }else{
-        alert("LỖI TÌM KIẾM !")
+        if (result_search.length!=0){
+            let liststudents = document.querySelector("#student");
+    
+            let htmls = 
+        result_search.map(function(student){
+            return `<li class="std">
+            <h2 class="content" style="margin-bottom:2px" >Số thứ tự :${student.id}</h2>
+            <h3 class="content">Mã sinh viên  :${student.msv}</h3>
+            <h3 class="content">Họ :${student.ho}</h3>
+            <h3 class="content">Tên :${student.ten}</h3>
+            <h3 class="content">Ngày sinh :${student.ngay_sinh}</h3>
+            <h3 class="content">Lớp :${student.lop}</h3>
+            <h3 class="content">Ngành :Công nghệ thông tin</h3>
+            <h3 class="content">SĐT :${student.Phone}</h3>
+            </li>`
+        })
+        liststudents.style.display = "block"
+    
+        liststudents.innerHTML = htmls.join('');
+        
+            
+        }else if (result_search.length==0){
+            alert(`Không có sinh viên với mã sinh viên là ${data_inp}`)
+    
+        }
+        else if(data_inp.length <=0){
+            alert("Ban chưa nhập !")
+            
+            
+    
+        }else{
+            alert("LỖI TÌM KIẾM !")
+        }
+
     }
+   
         
     
         
