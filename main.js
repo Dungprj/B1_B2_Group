@@ -10,7 +10,7 @@ for (let i=0;i<clone.length;i++){
 
 // xoa join group
 let getElement_search_btn = document.querySelector("#search_btn")
-
+let getElement_search_btn_vs2 = document.querySelector("#search_btn_vs2")
 let getElement_input = document.querySelector("#input_main")
 let getElement_title_input = document.querySelector("#title_input")
 
@@ -20,9 +20,25 @@ let getElement_close = document.querySelector("#close_btn")
 let getElement_split = document.querySelector("#btn_split")
 let getElement_change = document.querySelector("#btn_change")
 let getElement_list = document.querySelector("#student")
+let getElement_main_search = document.querySelector(".main_search")
+
+// console.log([getElement_search_btn.children])
+let x = screen.width;
 
 
 
+// console.log(getElement_search_btn.style.display)
+
+
+// let x = screen.colorDepth;
+// console.log(x)
+// if (x <= 1023){
+//     getElement_search_btn.style.display = "none"
+
+
+// if (getElement_search_btn.style.display == "block"){
+//     console.log("block")
+// }
 
 function start(){
     
@@ -100,9 +116,14 @@ function search_sv_by_Name(ds){
     ds_moi=ds.filter((obj)=>{
         return obj.ten.toUpperCase() == getElement_input.value.toUpperCase()
     })
-    console.log(ds_moi)
-    renderstudents(ds_moi)
-    console.log(`dang tim kiem sinh vien ${getElement_input.value}`)
+    if (ds_moi.length > 0){
+        renderstudents(ds_moi)
+
+    }else{
+        alert(`Không có sinh viên ${getElement_input.value}`)
+    }
+    
+    
 }
 
 // {'id': '1', 'msv': '2121050200', 'ho': 'Phạm Long', 'ten': 'An', 'ngay_sinh': '06/09/2003', 'lop': 'DCCTCT66B2', 'Phone': '0352914185'}   
@@ -258,6 +279,7 @@ function handle_mang(a){
 
 }
 
+
 // console.log(handle_mang(split_group(12,clone)))
 // ar = []
 // a0 = [1,2,3]
@@ -316,8 +338,24 @@ getElement_close.addEventListener("click",close_all)
 // getElement_change.addEventListener("click",change_text)
 // getElement_search_btn.addEventListener("click",excute)
 getElement_split.addEventListener("click",chia_nhom)
+getElement_search_btn_vs2.addEventListener("click",start)
 getElement_search_btn.addEventListener("click",start)
+// getElement_search_btn.addEventListener("click",start)
 
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+       start()
+        event.preventDefault();
+        // Do more work
+    }
+});
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        close_all()
+        event.preventDefault();
+        // Do more work
+    }
+});
 function Search_student(mang){
     
     
@@ -392,8 +430,12 @@ function Search_student(mang){
         liststudents.innerHTML = htmls.join('');
         
             
-        }else if (result_search.length==0){
+        }else if (result_search.length==0 && isNumber(data_inp)==1){
             alert(`Không có sinh viên với mã sinh viên là ${data_inp}`)
+    
+        }
+        else if (result_search.length==0 && isNumber(data_inp)==0){
+            alert(`Không có sinh viên ${data_inp}`)
     
         }
         else if(data_inp.length <=0){
@@ -404,8 +446,9 @@ function Search_student(mang){
         }else{
             alert("LỖI TÌM KIẾM !")
         }
-
     }
+
+}
    
         
     
@@ -418,4 +461,4 @@ function Search_student(mang){
 
     
 
-}
+

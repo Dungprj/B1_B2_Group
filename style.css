@@ -148,7 +148,7 @@ html{
     #change{
         display:inline-block;
         margin-bottom: 1px;
-        margin-top:5px
+        margin-top:5px;
 
     }
     #btn_change{
@@ -259,11 +259,12 @@ html{
         margin-top: -27px;
         height: 40px;
         display: block;
-        margin-left: 28px;;
+        margin-left: 28px;
 
     
         
     }
+    
     #search_btn:hover{
         background:rgb(231, 97, 97);
         color:#fff;
@@ -304,6 +305,9 @@ html{
 
     
         
+    }
+    #search_btn_vs2{
+        display:none;
     }
     #start:hover{
         background:rgb(231, 97, 97);

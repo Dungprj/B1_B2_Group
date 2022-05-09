@@ -7,6 +7,9 @@ html{
     .close_vs2{
         padding:3%;
     }
+    #search_btn{
+        display:none;
+    }
     .index_cl{
         background-color: #d74f4f;
         
@@ -64,6 +67,8 @@ html{
         overflow: hidden;
         display: block;
         margin-right: 5%;
+        padding-bottom: 5%;
+        position:relative;
     
         
        
@@ -73,6 +78,8 @@ html{
     #btn_split{
         display:inline-block;
         margin-bottom: 1px;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
         
 
 
@@ -115,6 +122,8 @@ html{
     #close_btn:hover{
         background-color: rgb(255, 44, 44);
         color: antiquewhite;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
 
     }
     #input_main{
@@ -124,12 +133,21 @@ html{
         
     }
     
-    #search_btn{
-        font-style: 18px    ;
+    #search_btn_vs2{
+        /* font-style: 18px    ;
         height:51px;
         font-size: 19px;
+        height: 56px; */
+        font-size: 22px;
+        position: absolute;
+        top: 51%;
+        right: 1%;
+        height: 28%;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
     }
-    #search_btn:hover{
+    }
+    #search_btn_vs2:hover{
         background:rgb(231, 97, 97);
         color:#fff;
         
@@ -185,4 +203,3 @@ html{
         
     }
     
-}
